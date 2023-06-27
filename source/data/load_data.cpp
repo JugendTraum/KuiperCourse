@@ -50,6 +50,8 @@ std::shared_ptr<Tensor<float >> CSVDataLoader::LoadDataWithHeader(const std::str
     row += 1;
     CHECK(row <= rows) << "There are excessive elements on the row";
   }
+
+  in.close();
   return input_tensor;
 }
 
@@ -93,6 +95,8 @@ std::shared_ptr<Tensor<float >> CSVDataLoader::LoadData(const std::string &file_
     row += 1;
     CHECK(row <= rows) << "There are excessive elements on the row";
   }
+
+  in.close();
   return input_tensor;
 }
 
