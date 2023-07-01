@@ -37,6 +37,42 @@ TEST(test_layer, forward_relu1) {
   }
 }
 
+// 注册模式的意义：
+// 如果有一个算子列表或一个网络
+// op list
+// conv1
+// conv2
+// relu 
+// sigmoid
+// linear
+// ...
+
+// 有注册机制的理论调用
+/**
+ * ops = {conv1, conv2, relu, sigmoid, linear}
+ * layers = {}
+ * for op in ops:
+ *   layers.push_back(LayerRegisterer::CreateLayer(op))
+ * 初始化完毕
+*/
+
+// 如果没有注册机制
+/**
+ * 模型多少层，就要执行多少次
+ * ConvLayer conv1(conv1_op);
+ * ConvLayer conv2(conv2_op);
+ * ReluLayer relu(relu_op);
+ * SigmoidLayer sigmoid(sigmoid_op);
+ * LinearLayer linear(linear_op);
+ * 
+ * layers.push_back({conv1, conv2, relu, sigmoid, linear})
+*/
+
+
+// 还有个问题是，算子不是要提前定义出来？
+// std::shared_ptr<Operator> relu_op = std::make_shared<ReluOperator>(thresh);
+// 所以上面的算子列表定义之前是否要先像上面把每个定义后再将op类型（而不是op名字）放入ops中
+
 TEST(test_layer, forward_relu2) {
   using namespace kuiper_infer;
   float thresh = 0.f;
