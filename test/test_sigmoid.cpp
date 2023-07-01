@@ -22,8 +22,6 @@ TEST(test_layer, forward_sigmoid) {
   inputs.push_back(input);
   sigmoid_layer->Forwards(inputs, outputs);
 
-  ASSERT_EQ(outputs.size(), 1); // 测试1
-
   ASSERT_EQ(outputs.size(), 1);
   for (int i = 0; i < outputs.size(); ++i) {
     float a = input->index(0);
